@@ -168,11 +168,11 @@ Lets say we have documents with this data:
 - **\$ne**: Check for not equal.  
   Ex: **db.users.find({ name: { \$ne: “Mustufa” } })** - Get all users with a name other than Mustufa.  
 
-- **`$gt / $gte`**: Check for greater than and greater than or equal to.  
+- **$gt / $gte**: Check for greater than and greater than or equal to.  
   Ex1: **db.users.find({ age: { \$gt: 12 } })** - Get all users with an age greater than 12.  
   Ex2: **db.users.find({ age: { \$gte: 1 5 } })** - Get all users with an age greater than or equal to 15.  
 
-- **`$lt / $lte`**: Check for less than and less than or equal to.  
+- **$lt / $lte**: Check for less than and less than or equal to.  
   Ex1: **db.users.find({ age: { \$lt: 12 } })** - Get all users with an age less than 12.  
   Ex2: **db.users.find({ age: { \$lte: 1 5 } })** - Get all users with an age less than or equal to 15.  
 
@@ -190,19 +190,19 @@ Lets say we have documents with this data:
   Ex: **db.users.find({ \$or: [{ age: 20 } , { name: “Mustufa” } ] })** - Get all users with a name of Mustufa or an age of 20.  
 
 - **\$not**: Negate the filter inside of \$not.  
-  Ex: **`db.users.find({ name: { $not: { $eq: “Mustufa” } } })`** - Get all users with a name other than Mustufa.  
+  Ex: **db.users.find({ name: { $not: { $eq: “Mustufa” } } })** - Get all users with a name other than Mustufa.  
 
 - **\$exists**: Check if a field exists.  
   Ex: **db.users.find({ name: { \$exists: true } })** - Get all users that have a name field.  
 
 - **\$expr**: Do comparisons between different fields.  
-  Ex: **`db.users.find({ $expr: { $gt:  [“$balance” , “$debt” ] } })`** - Get all users that have a balance that is greater than their debt.
+  Ex: **db.users.find({ $expr: { $gt:  [“$balance” , “$debt” ] } })** - Get all users that have a balance that is greater than their debt.
 
 ## Complex Update Object
 
 #### Any combination of the below can be use inside an update object to make complex updates
 
-- **\$set**: Update only the fields passed to `$set`. This will not affect
+- **\$set**: Update only the fields passed to $set. This will not affect
   any fields not passed to \$set. It will add a new field if the specified field does not exist.  
   Ex: **db.users.updateOne({ age: 12 }, { \$set: { name: “Hi” } })** - Update the name of the first user with the age of 12 to the value Hi.  
 
@@ -221,16 +221,16 @@ Lets say we have documents with this data:
 - **\$pull**: Remove a value from an array field.  
   Ex: **db.users.updateMany({}, { \$pull: { friends: “Mike” } })** - Remove Mike from the friends array for all users.  
 
-- **\$each**: The `$each` modifier is available for use with the `$addToSet` operator and the `$push` operator. We can use it to add multiple elements at once to an array.  
-  Ex: `db.users.updateOne({_id: 9}, {$push: {exField: {$each: [12, 14]}}})` - Pushes the two values 12 and 14 to the array exField.  
+- **$each**: The $each modifier is available for use with the $addToSet operator and the $push operator. We can use it to add multiple elements at once to an array.  
+  Ex: **db.users.updateOne({_id: 9}, {$push: {exField: {$each: [12, 14]}}})** - Pushes the two values 12 and 14 to the array exField.  
 
-- **\$\<identifier>**: The filtered positional operator \$[\<identifier>] identifies the array elements that match the arrayFilters conditions for an update operation. If we have an array with with many values and want to update only a particular value then we can use this.
-
-````**Syntax:**
+- **$\<identifier>**: The filtered positional operator $[\<identifier>] identifies the array elements that match the arrayFilters conditions for an update operation. If we have an array with with many values and want to update only a particular value then we can use this.  
+Syntax:  
+```
 db.collection.updateMany(
    { <query conditions> },
    { <update operator>: { "<array>.$[<identifier>]" : value } },
    { arrayFilters: [ { <identifier>: <condition> } ] }
-)```
-Ex: `db.users.updateOne( {_id: 8}, {$inc: {"exField.$[value]": 2}}, {arrayFilters: [{value: 12}]})` - Increments the value 12 in the array with the name exField by 2. If there are multiple values of 12, it updates them all.
-````
+)
+```    
+Ex: **db.users.updateOne( {_id: 8}, {$inc: {"exField.$[value]": 2}}, {arrayFilters: [{value: 12}]})** - Increments the value 12 in the array with the name exField by 2. If there are multiple values of 12, it updates them all.
