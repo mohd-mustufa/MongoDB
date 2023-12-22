@@ -1,0 +1,24 @@
+{
+	"name": "mongodb",
+	"version": "1.0.0",
+	"description": "## Terminology",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://mohd-mustufa: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@github.com/mohd-mustufa/MongoDB.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/mohd-mustufa/MongoDB/issues"
+	},
+	"homepage": "https://github.com/mohd-mustufa/MongoDB#readme",
+	"dependencies": {
+		"express": "^4.18.2",
+		"mongodb": "^6.3.0"
+	}
+}
